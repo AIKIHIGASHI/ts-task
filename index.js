@@ -1,5 +1,5 @@
 "use strict";
-var output = function (text) {
+const output = (text) => {
     return text;
 };
 console.log(output('HelloWorld'));
