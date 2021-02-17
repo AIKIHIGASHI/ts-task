@@ -1,12 +1,8 @@
-interface StringKeyObject {
-  [key: string]: string;
-}
-
-class ObjectWrapper {
+class ObjectWrapper<T extends { [key: string]: string }> {
   /***
    * 引数のオブジェクトのコピーを this._objに設定
    */
-  constructor(private _obj: StringKeyObject) {
+  constructor(private _obj: T) {
     const obj = _obj;
     this._obj = obj;
   }
@@ -15,7 +11,7 @@ class ObjectWrapper {
    * this._objのコピーを返却
    * @return Object
    */
-  get obj(): StringKeyObject {
+  get obj(): T {
     const obj = this._obj;
     return obj;
   }
@@ -25,7 +21,7 @@ class ObjectWrapper {
    * @param key オブジェクトのキー
    * @param val オブジェクトの値
    */
-  set(key: string, val: string): boolean {
+  set<K extends keyof T>(key: K, val: T[K]): boolean {
     if (!(key in this._obj)) return false;
     this._obj[key] = val;
     return true;
@@ -36,7 +32,7 @@ class ObjectWrapper {
    * 指定のキーが存在しない場合 undefinedを返却
    * @param key オブジェクトのキー
    */
-  get(key: string): string | undefined {
+  get<K extends keyof T>(key: K): T[K] | undefined {
     if (!(key in this._obj)) return undefined;
     const val = this._obj[key];
     return val;
@@ -45,13 +41,17 @@ class ObjectWrapper {
   /**
    * 指定した値を持つkeyの配列を返却。該当のものがなければ空の配列を返却。
    */
-  findKeys(val: string): string[] {
-    const keys = [];
+  findKeys<K extends keyof T>(val: T[K]): string[] {
+    let keys: string[] = [];
     for (const key in this._obj) {
       keys.push(key);
     }
-    return keys.filter(key => this._obj[key] === val);
+    return keys.filter((key) => this._obj[key] === val);
   }
+}
+
+interface StringKeyObject {
+  [key: string]: string;
 }
 
 /**
@@ -59,7 +59,7 @@ class ObjectWrapper {
  * 完成したら、以下のスクリプトがすべてOKになる。
  */
 const obj1 = { a: '01', b: '02' };
-const wrappedObj1 = new ObjectWrapper(obj1);
+const wrappedObj1 = new ObjectWrapper<StringKeyObject>(obj1);
 
 if (wrappedObj1.obj.a === '01') {
   console.log('OK: get obj()');
@@ -80,7 +80,7 @@ if (wrappedObj1.get('b') === '04' && wrappedObj1.get('c') === undefined) {
 }
 
 const obj2 = { a: '01', b: '02', bb: '02', bbb: '02' };
-const wrappedObj2 = new ObjectWrapper(obj2);
+const wrappedObj2 = new ObjectWrapper<StringKeyObject>(obj2);
 const keys = wrappedObj2.findKeys('02');
 if (wrappedObj2.findKeys('03').length === 0 && keys.includes('b') && keys.includes('bb') && keys.includes('bbb') && keys.length === 3) {
   console.log('OK: findKeys(val)');
