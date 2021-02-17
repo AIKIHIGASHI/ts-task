@@ -4,14 +4,16 @@ class ObjectWrapper {
      * 引数のオブジェクトのコピーを this._objに設定
      */
     constructor(_obj) {
-        this._obj = _obj;
+        const obj = _obj;
+        this._obj = obj;
     }
     /**
      * this._objのコピーを返却
      * @return Object
      */
     get obj() {
-        return this._obj;
+        const obj = this._obj;
+        return obj;
     }
     /**
      * this._obj[key] に valを設定。keyがthis._objに存在しない場合、falseを返却

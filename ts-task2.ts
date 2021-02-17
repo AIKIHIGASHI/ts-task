@@ -9,7 +9,8 @@ class ObjectWrapper {
    * 引数のオブジェクトのコピーを this._objに設定
    */
   constructor(_obj: StringKeyObject) {
-    this._obj = _obj;
+    const obj = _obj;
+    this._obj = obj
   }
 
   /**
@@ -17,7 +18,8 @@ class ObjectWrapper {
    * @return Object
    */
   get obj(): StringKeyObject {
-    return this._obj;
+    const obj = this._obj
+    return obj;
   }
 
   /**
