@@ -4,6 +4,7 @@ class ObjectWrapper {
      * 引数のオブジェクトのコピーを this._objに設定
      */
     constructor(_obj) {
+        this._obj = _obj;
         const obj = _obj;
         this._obj = obj;
     }

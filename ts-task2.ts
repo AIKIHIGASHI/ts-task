@@ -3,12 +3,10 @@ interface StringKeyObject {
 }
 
 class ObjectWrapper {
-  private _obj: StringKeyObject;
-
   /***
    * 引数のオブジェクトのコピーを this._objに設定
    */
-  constructor(_obj: StringKeyObject) {
+  constructor(private _obj: StringKeyObject) {
     const obj = _obj;
     this._obj = obj
   }
