@@ -48,11 +48,9 @@ class ObjectWrapper {
   findKeys(val: string): string[] {
     const keys = [];
     for (const key in this._obj) {
-      if (this._obj[key] === val) {
-        keys.push(key);
-      }
+      keys.push(key);
     }
-    return keys;
+    return keys.filter(key => this._obj[key] === val);
   }
 }
 
