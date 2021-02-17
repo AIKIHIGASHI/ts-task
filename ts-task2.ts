@@ -38,7 +38,8 @@ class ObjectWrapper {
    */
   get(key: string): string | undefined {
     if (!(key in this._obj)) return undefined;
-    return this._obj[key];
+    const val = this._obj[key];
+    return val;
   }
 
   /**

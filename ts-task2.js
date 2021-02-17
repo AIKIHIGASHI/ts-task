@@ -35,7 +35,8 @@ class ObjectWrapper {
     get(key) {
         if (!(key in this._obj))
             return undefined;
-        return this._obj[key];
+        const val = this._obj[key];
+        return val;
     }
     /**
      * 指定した値を持つkeyの配列を返却。該当のものがなければ空の配列を返却。
