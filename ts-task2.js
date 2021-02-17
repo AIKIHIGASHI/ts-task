@@ -22,13 +22,10 @@ class ObjectWrapper {
      * @param val オブジェクトの値
      */
     set(key, val) {
-        if (key in this._obj) {
-            this._obj[key] = val;
-            return true;
-        }
-        else {
+        if (!(key in this._obj))
             return false;
-        }
+        this._obj[key] = val;
+        return true;
     }
     /**
      * 指定したキーの値のコピーを返却
@@ -36,12 +33,9 @@ class ObjectWrapper {
      * @param key オブジェクトのキー
      */
     get(key) {
-        if (key in this._obj) {
-            return this._obj[key];
-        }
-        else {
+        if (!(key in this._obj))
             return undefined;
-        }
+        return this._obj[key];
     }
     /**
      * 指定した値を持つkeyの配列を返却。該当のものがなければ空の配列を返却。

@@ -8,7 +8,7 @@ class ObjectWrapper {
    */
   constructor(private _obj: StringKeyObject) {
     const obj = _obj;
-    this._obj = obj
+    this._obj = obj;
   }
 
   /**
@@ -16,7 +16,7 @@ class ObjectWrapper {
    * @return Object
    */
   get obj(): StringKeyObject {
-    const obj = this._obj
+    const obj = this._obj;
     return obj;
   }
 
@@ -26,12 +26,9 @@ class ObjectWrapper {
    * @param val オブジェクトの値
    */
   set(key: string, val: string): boolean {
-    if (key in this._obj) {
-      this._obj[key] = val;
-      return true;
-    } else {
-      return false;
-    }
+    if (!(key in this._obj)) return false;
+    this._obj[key] = val;
+    return true;
   }
 
   /**
@@ -40,11 +37,8 @@ class ObjectWrapper {
    * @param key オブジェクトのキー
    */
   get(key: string): string | undefined {
-    if (key in this._obj) {
-      return this._obj[key];
-    } else {
-      return undefined;
-    }
+    if (!(key in this._obj)) return undefined;
+    return this._obj[key];
   }
 
   /**
