@@ -33,7 +33,6 @@ class ObjectWrapper<T extends { [key: string]: string }> {
    * @param key オブジェクトのキー
    */
   get<K extends keyof T>(key: K): T[K] | undefined {
-    if (!(key in this._obj)) return undefined;
     const val = this._obj[key];
     return _.cloneDeep(val);
   }

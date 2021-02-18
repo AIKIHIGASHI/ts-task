@@ -36,8 +36,6 @@ class ObjectWrapper {
      * @param key オブジェクトのキー
      */
     get(key) {
-        if (!(key in this._obj))
-            return undefined;
         const val = this._obj[key];
         return lodash_1.default.cloneDeep(val);
     }
