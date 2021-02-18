@@ -43,10 +43,7 @@ class ObjectWrapper {
      * 指定した値を持つkeyの配列を返却。該当のものがなければ空の配列を返却。
      */
     findKeys(val) {
-        let keys = [];
-        for (const key in this._obj) {
-            keys.push(key);
-        }
+        const keys = Object.keys(this._obj);
         return keys.filter((key) => this._obj[key] === val);
     }
 }
