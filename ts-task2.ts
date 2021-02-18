@@ -1,10 +1,11 @@
+import _ from 'lodash'
+
 class ObjectWrapper<T extends { [key: string]: string }> {
   /***
    * 引数のオブジェクトのコピーを this._objに設定
    */
   constructor(private _obj: T) {
-    const obj = _obj;
-    this._obj = obj;
+    this._obj = _.cloneDeep(_obj);
   }
 
   /**
@@ -12,8 +13,7 @@ class ObjectWrapper<T extends { [key: string]: string }> {
    * @return Object
    */
   get obj(): T {
-    const obj = this._obj;
-    return obj;
+    return _.cloneDeep(this._obj);
   }
 
   /**
@@ -35,7 +35,7 @@ class ObjectWrapper<T extends { [key: string]: string }> {
   get<K extends keyof T>(key: K): T[K] | undefined {
     if (!(key in this._obj)) return undefined;
     const val = this._obj[key];
-    return val;
+    return _.cloneDeep(val);
   }
 
   /**

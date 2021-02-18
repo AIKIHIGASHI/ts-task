@@ -1,20 +1,23 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const lodash_1 = __importDefault(require("lodash"));
 class ObjectWrapper {
     /***
      * 引数のオブジェクトのコピーを this._objに設定
      */
     constructor(_obj) {
         this._obj = _obj;
-        const obj = _obj;
-        this._obj = obj;
+        this._obj = lodash_1.default.cloneDeep(_obj);
     }
     /**
      * this._objのコピーを返却
      * @return Object
      */
     get obj() {
-        const obj = this._obj;
-        return obj;
+        return lodash_1.default.cloneDeep(this._obj);
     }
     /**
      * this._obj[key] に valを設定。keyがthis._objに存在しない場合、falseを返却
@@ -36,7 +39,7 @@ class ObjectWrapper {
         if (!(key in this._obj))
             return undefined;
         const val = this._obj[key];
-        return val;
+        return lodash_1.default.cloneDeep(val);
     }
     /**
      * 指定した値を持つkeyの配列を返却。該当のものがなければ空の配列を返却。
