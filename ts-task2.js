@@ -3,21 +3,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const lodash_1 = __importDefault(require("lodash"));
+const ramda_1 = __importDefault(require("ramda"));
 class ObjectWrapper {
     /***
      * 引数のオブジェクトのコピーを this._objに設定
      */
     constructor(_obj) {
         this._obj = _obj;
-        this._obj = lodash_1.default.cloneDeep(_obj);
+        this._obj = ramda_1.default.clone(_obj);
     }
     /**
      * this._objのコピーを返却
      * @return Object
      */
     get obj() {
-        return lodash_1.default.cloneDeep(this._obj);
+        return ramda_1.default.clone(this._obj);
     }
     /**
      * this._obj[key] に valを設定。keyがthis._objに存在しない場合、falseを返却
@@ -37,13 +37,13 @@ class ObjectWrapper {
      */
     get(key) {
         const val = this._obj[key];
-        return lodash_1.default.cloneDeep(val);
+        return ramda_1.default.clone(val);
     }
     /**
      * 指定した値を持つkeyの配列を返却。該当のものがなければ空の配列を返却。
      */
     findKeys(val) {
-        const keys = Object.keys(this._obj);
+        const keys = ramda_1.default.keys(this._obj);
         return keys.filter((key) => this._obj[key] === val);
     }
 }

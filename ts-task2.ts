@@ -1,11 +1,11 @@
-import _ from 'lodash'
+import R from 'ramda'
 
 class ObjectWrapper<T extends object> {
   /***
    * 引数のオブジェクトのコピーを this._objに設定
    */
   constructor(private _obj: T) {
-    this._obj = _.cloneDeep(_obj);
+    this._obj = R.clone(_obj);
   }
 
   /**
@@ -13,7 +13,7 @@ class ObjectWrapper<T extends object> {
    * @return Object
    */
   get obj(): T {
-    return _.cloneDeep(this._obj);
+    return R.clone(this._obj);
   }
 
   /**
@@ -34,14 +34,14 @@ class ObjectWrapper<T extends object> {
    */
   get<K extends keyof T>(key: K): T[K] | undefined {
     const val = this._obj[key];
-    return _.cloneDeep(val);
+    return R.clone(val);
   }
 
   /**
    * 指定した値を持つkeyの配列を返却。該当のものがなければ空の配列を返却。
    */
   findKeys<K extends keyof T>(val: T[K]): (keyof T)[] {
-    const keys = (Object.keys(this._obj) as (keyof T)[])
+    const keys = R.keys(this._obj);
     return keys.filter((key) => this._obj[key] === val);
   }
 }
